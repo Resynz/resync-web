@@ -52,7 +52,11 @@ NetworkConfig.afterFunc = (res,err,loading,vue) => {
 };
 
 NetworkConfig.apis = [
-
+    {
+        name: enums.Login,
+        url: '/admin/login',
+        method: 'POST'
+    }
 ];
 
 export default NetworkConfig;

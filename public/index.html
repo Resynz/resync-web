@@ -5,13 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Resync</title>
   </head>
-  <body>
+  <body style="margin: 0">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+
+  <script>
+      function __svgWM(width,height,content,container,fontSize) {
+          const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="`+width+`" height="`+height+`">
+<text x="50%" y="50%" dy="12px" text-anchor="middle" stroke="#000000" stroke-width="1" stroke-opacity="0.05" fill="none" transform="rotate(-45,120 120)"
+style="font-size: `+fontSize+`;">`+content+`</text></svg>`;
+          const base64Url = `data:image/svg+xml;base64,`+window.btoa(unescape(encodeURIComponent(svgStr)));
+          const __wm = document.querySelector('.__wm');
+          const watermarkDiv = __wm || document.createElement("div");
+          const styleStr = `
+        position:absolute;
+        top:0;
+        left:0;
+        height:100%;
+        width:100%;
+        z-index:2000;
+        pointer-events:none;
+        background-repeat:repeat;
+        background-image:url('`+base64Url+`');
+      `;
+          watermarkDiv.setAttribute('style',styleStr);
+          watermarkDiv.classList.add('__wm');
+          if(!__wm){
+              container.style.position = 'relative';
+              container.insertBefore(watermarkDiv,container.firstChild);
+          }
+          const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+          if (!MutationObserver) {
+              let mo = new MutationObserver(function () {
+                  const __wm  = document.querySelector('.__wm');
+                  if ((__wm && __wm.getAttribute('style') !== styleStr) || !__wm) {
+                      mo.disconnect();
+                      mo = null;
+                      __svgWM(width,height,content,container,fontSize);
+                  }
+              });
+              mo.observe(container,{
+                  attributes: true,
+                  subtree: true,
+                  childList: true
+              })
+          }
+      }
+      __svgWM('300px','200px','Resync',document.body,'10px Microsoft Yahei')
+  </script>
 </html>
