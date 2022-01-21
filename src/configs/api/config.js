@@ -56,6 +56,11 @@ NetworkConfig.apis = [
         name: enums.Login,
         url: '/admin/login',
         method: 'POST'
+    },
+    {
+        name: enums.GetUserInfo,
+        url: '/admin/info',
+        method: 'GET'
     }
 ];
 

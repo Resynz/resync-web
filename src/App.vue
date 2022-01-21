@@ -26,7 +26,7 @@ export default {
         return this.login();
 
       if (!this.$store.name)
-        this.$store.push({name:'Index'});
+        this.$router.push({name:'Index'});
     })
   },
   data () {

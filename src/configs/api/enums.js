@@ -3,5 +3,6 @@
  * @Date: 2022/1/17 15:05
  */
 export default {
-    Login: 'Login'
+    Login: 'Login',
+    GetUserInfo: 'GetUserInfo',
 }
