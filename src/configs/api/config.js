@@ -61,6 +61,71 @@ NetworkConfig.apis = [
         name: enums.GetUserInfo,
         url: '/admin/info',
         method: 'GET'
+    },
+    {
+        name: enums.AddGroup,
+        url: '/group/',
+        method: 'POST'
+    },
+    {
+        name: enums.GetGroupList,
+        url: '/group/list',
+        method: 'GET'
+    },
+    {
+        name: enums.UpdateGroup,
+        url: '/group/:id',
+        method: 'PUT'
+    },
+    {
+        name: enums.RemoveGroup,
+        url: '/group/:id',
+        method: 'DELETE'
+    },
+    {
+        name: enums.GetTaskList,
+        url: '/task/list',
+        method: 'GET'
+    },
+    {
+        name: enums.AddTask,
+        url: '/task/',
+        method: 'POST'
+    },
+    {
+        name: enums.GetCodeAuthList,
+        url: '/code_auth/list',
+        method: 'GET'
+    },
+    {
+        name: enums.AddCodeAuth,
+        url: '/code_auth/',
+        method: 'POST'
+    },
+    {
+        name: enums.GetTaskInfo,
+        url: '/task/info',
+        method: 'GET'
+    },
+    {
+        name: enums.UpdateTask,
+        url: '/task/:id',
+        method: 'PUT'
+    },
+    {
+        name: enums.StartTask,
+        url: '/task/start',
+        method: 'POST'
+    },
+    {
+        name: enums.TaskDump,
+        url: '/task/dump',
+        method: 'GET'
+    },
+    {
+        name: enums.CancelTask,
+        url: '/task/cancel',
+        method: 'POST'
     }
 ];
 

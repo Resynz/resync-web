@@ -24,8 +24,7 @@ export default {
     this.$nextTick(()=>{
       if (!this.$store.token)
         return this.login();
-
-      if (!this.$store.name)
+      if (!this.$route.name)
         this.$router.push({name:'Index'});
     })
   },
