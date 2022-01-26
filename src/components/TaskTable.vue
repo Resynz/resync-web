@@ -18,7 +18,12 @@
           prop="last_record.status"
           label="状态"
           width="120"
-      />
+      >
+        <template v-slot="scope">
+          <el-tag v-if="scope.row.last_record.status !== undefined" :type="computeStatusTagType(scope.row.last_record.status)">{{computeStatusTag(scope.row.last_record.status)}}</el-tag>
+          <span v-else> - </span>
+        </template>
+      </el-table-column>
 
       <el-table-column
           align="center"
@@ -27,24 +32,23 @@
       />
       <el-table-column
           align="center"
-          prop="create_time"
-          label="创建时间"
+          prop="last_record.creator_name"
+          label="执行人"
+      />
+      <el-table-column
+          align="center"
+          label="执行时间"
       >
         <template v-slot="scope">
-          {{scope.row.create_time && $globalFunction.formatTime(scope.row.create_time * 1000) || '-'}}
+          {{scope.row.last_record.start_time && $globalFunction.formatTime(scope.row.last_record.start_time * 1000) || '-'}}
         </template>
       </el-table-column>
       <el-table-column
           align="center"
-          prop="modifier_name"
-          label="操作人"
-      />
-      <el-table-column
-          align="center"
-          label="操作时间"
+          label="执行耗时"
       >
         <template v-slot="scope">
-          {{scope.row.modify_time && $globalFunction.formatTime(scope.row.modify_time * 1000) || '-'}}
+          {{scope.row.last_record.start_time && scope.row.last_record.end_time && `${scope.row.last_record.end_time - scope.row.last_record.start_time}s` || '-'}}
         </template>
       </el-table-column>
       <el-table-column
@@ -117,6 +121,12 @@ export default {
     }
   },
   methods: {
+    computeStatusTagType (status) {
+      return ["info","warning","primary","success","danger","info"][status];
+    },
+    computeStatusTag (status) {
+      return ["-","等待中","执行中","成功","失败","已取消"][status];
+    },
     paginationSizeChange (val) {
       this.pagination.limit = val;
       this.getTaskList()

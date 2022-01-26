@@ -10,10 +10,10 @@
         <div class="form">
           <el-form size="medium" ref="form" label-width="80px" :model="form" :rules="rules">
             <el-form-item label="账号" prop="name">
-              <el-input placeholder="请输入账号" v-model="form.name" clearable/>
+              <el-input placeholder="请输入账号" @keyup.native="listenKeyUp" v-model="form.name" clearable/>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input placeholder="请输入密码" v-model="form.password" clearable type="password" show-password/>
+              <el-input placeholder="请输入密码" @keyup.native="listenKeyUp" v-model="form.password" clearable type="password" show-password/>
             </el-form-item>
           </el-form>
         </div>
@@ -57,7 +57,12 @@ export default {
           await this.$listener.$emit(EventEnums.DoLogin,res.token);
         }
       });
-    }
+    },
+    listenKeyUp (v) {
+      if (v && v.key === 'Enter') {
+        this.login()
+      }
+    },
   }
 }
 </script>

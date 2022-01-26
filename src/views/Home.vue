@@ -13,7 +13,7 @@
             <div style="width: 160px;display: flex;flex-direction: column;margin:0 10px;justify-content: space-between;height: 30px;">
               <div class="info_title">{{item.name}}</div>
             </div>
-            <i class="i_remove el-icon-delete" />
+            <i class="i_remove el-icon-delete" @click="cancelTask(item.id,item.name)"/>
           </div>
         </div>
       </div>
@@ -114,12 +114,14 @@ export default {
   margin-left: 20px;
 }
 .queue {
+  width: 280px;
   height: 100%;
   border: 1px solid #E4E7ED;
   overflow-y: scroll;
   border-radius: 4px 4px 0 0;
 }
 .status {
+  width: 280px;
   border: 1px solid #E4E7ED;
   border-radius: 4px 4px 0 0;
   margin-top: 20px;
@@ -147,6 +149,7 @@ export default {
   text-align: left;
 }
 .head {
+  width: 50px;
   font-size: 22px;
   font-weight: bold;
 }
