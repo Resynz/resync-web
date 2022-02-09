@@ -12,7 +12,11 @@
         align="center"
         prop="name"
         label="任务名称"
-      />
+      >
+        <template v-slot="scope">
+          <el-link style="color: #C260D6">{{scope.row.name}}</el-link>
+        </template>
+      </el-table-column>
       <el-table-column
           align="center"
           prop="last_record.status"
@@ -54,12 +58,13 @@
       <el-table-column
           align="center"
           label="操作"
-          width="200"
+          width="220"
           fixed="right"
       >
         <template v-slot="scope">
           <el-button @click="editTask(scope.row.id)" size="small" plain type="success">编辑</el-button>
-          <el-button @click="startTask(scope.row.id)" size="small" plain type="primary" :loading="lockId === scope.row.id">执行</el-button>
+          <el-button v-if="scope.row.last_record.status !== 2" @click="startTask(scope.row.id)" size="small" plain type="primary" :loading="lockId === scope.row.id">执行</el-button>
+          <el-button v-if="scope.row.last_record.status !== 2" @click="removeTask(scope.row)" size="small" plain type="danger" :loading="lockId === scope.row.id">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -158,6 +163,17 @@ export default {
       if (res && res.result) {
         await this.getTaskList();
       }
+    },
+    removeTask (item) {
+      this.$confirm(`确定要删除任务【${item.name}】?`,'提示',{type:'warning'}).then(async ()=>{
+        this.lockId = item.id;
+        const res = await this.$networkHandler.sendRequest(ApiEnums.RemoveTask,{id: item.id});
+        this.lockId = null;
+        if (res && res.result) {
+          this.$message.success('操作成功');
+          await this.getTaskList();
+        }
+      }).catch(e=>{})
     }
   }
 }

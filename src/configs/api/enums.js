@@ -18,4 +18,6 @@ export default {
     StartTask: 'StartTask',
     TaskDump: 'TaskDump',
     CancelTask: 'CancelTask',
+    GetTaskLogInfo: 'GetTaskLogInfo',
+    RemoveTask: 'RemoveTask',
 }

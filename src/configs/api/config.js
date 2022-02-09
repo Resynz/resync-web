@@ -126,6 +126,16 @@ NetworkConfig.apis = [
         name: enums.CancelTask,
         url: '/task/cancel',
         method: 'POST'
+    },
+    {
+        name: enums.GetTaskLogInfo,
+        url: '/log/info/:id',
+        method: 'GET'
+    },
+    {
+        name: enums.RemoveTask,
+        url: '/task/:id',
+        method: 'DELETE'
     }
 ];
 

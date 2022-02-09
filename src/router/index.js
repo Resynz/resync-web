@@ -5,6 +5,7 @@ import NProgress from 'nprogress'
 import '../theme/nprogress/nprogress.css'
 import Index from "../views/Index";
 import Home from "../views/Home";
+import Log from "../views/Log";
 
 Vue.use(VueRouter)
 NProgress.inc(0.2);
@@ -34,6 +35,7 @@ const routes = [];
 routes.push({ path: '/login', name: 'Login',component: Login});
 routes.push({ path: '/index', name: 'Index', component: Index});
 routes.push({ path: '/home', name: 'Home', component: Home, parent: 'Index'});
+routes.push({ path: '/log/:id',name: 'Log',component: Log, parent: 'Index'});
 
 const router = new VueRouter({
   routes:initRoutes(routes),
