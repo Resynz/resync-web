@@ -20,4 +20,5 @@ export default {
     CancelTask: 'CancelTask',
     GetTaskLogInfo: 'GetTaskLogInfo',
     RemoveTask: 'RemoveTask',
+    GetTaskLogList: 'GetTaskLogList',
 }

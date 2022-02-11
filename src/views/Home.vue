@@ -35,7 +35,6 @@ export default {
 }
 .right {
   width: 80%;
-  /*max-width: calc(100vw - 500px);*/
   height: auto;
   margin-left: 20px;
 }

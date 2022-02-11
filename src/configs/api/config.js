@@ -136,6 +136,11 @@ NetworkConfig.apis = [
         name: enums.RemoveTask,
         url: '/task/:id',
         method: 'DELETE'
+    },
+    {
+        name: enums.GetTaskLogList,
+        url: '/log/list',
+        method: 'GET'
     }
 ];
 

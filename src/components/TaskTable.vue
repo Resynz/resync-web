@@ -14,7 +14,7 @@
         label="任务名称"
       >
         <template v-slot="scope">
-          <el-link style="color: #C260D6">{{scope.row.name}}</el-link>
+          <el-link style="color: #C260D6" @click="toDetail(scope.row.id)">{{scope.row.name}}</el-link>
         </template>
       </el-table-column>
       <el-table-column
@@ -174,6 +174,9 @@ export default {
           await this.getTaskList();
         }
       }).catch(e=>{})
+    },
+    toDetail (id) {
+      this.$router.push({name: 'Detail',params: {id}})
     }
   }
 }
