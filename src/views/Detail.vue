@@ -4,16 +4,22 @@
       <pending />
     </div>
     <div class="right" v-loading="loading">
+      <div style="height: 24px;width:600px;text-align: left;">
+        <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
+      </div>
       <div class="head">
         <div style="font-size: 32px;font-weight: bold">{{info.task && info.task.name || '-'}}</div>
-        <div style="font-size: 14px;color: #909399;">{{info.detail && info.detail.note || '第三方的身份的是非得失'}}</div>
+        <div style="font-size: 14px;color: #909399;">{{info.detail && info.detail.note || ''}}</div>
         <div style="margin-top: 10px">
           <el-button size="small" type="success" @click="editTask" plain>编辑</el-button>
           <el-button size="small" type="primary" v-if="!info.last_record || info.last_record.status !== 2" plain @click="startTask" :loading="lockId === id">执行</el-button>
           <el-button size="small" type="danger" v-if="!info.last_record || info.last_record.status !== 2" plain @click="removeTask">删除</el-button>
         </div>
       </div>
-      <div class="bbody">
+      <div class="bbody" style="margin-top: 10px">
+        <div class="b_title">
+          执行历史
+        </div>
         <log-table :task-id="id" />
       </div>
     </div>
@@ -34,7 +40,7 @@ export default {
     if (!this.$route.params.id) {
       return this.$router.back();
     }
-    this.id = this.$route.params.id;
+    this.id = parseInt(this.$route.params.id);
     this.getTaskInfo();
   },
   components: {
@@ -95,5 +101,11 @@ export default {
   width: 80%;
   height: auto;
   margin-left: 20px;
+}
+.b_title {
+  text-align: left;
+  font-size: 14px;
+  color: #909399;
+  font-weight: bold;
 }
 </style>

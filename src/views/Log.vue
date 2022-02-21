@@ -1,11 +1,16 @@
 <template>
   <div class="log_wrap">
-    <div style="height: 24px;width:600px;text-align: left;">
-      <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
+    <div class="left">
+      <pending />
     </div>
-    <div class="logs">
-      <div class="log_item" :class="`log_type_${item.type}`" v-for="(item,index) in logs" :key="index">
-        {{item.txt}}
+    <div class="right">
+      <div style="height: 24px;width:600px;text-align: left;">
+        <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
+      </div>
+      <div class="logs">
+        <div class="log_item" :class="`log_type_${item.type}`" v-for="(item,index) in logs" :key="index">
+          {{item.txt}}
+        </div>
       </div>
     </div>
 
@@ -14,7 +19,7 @@
 
 <script>
 import {ApiEnums} from "../configs/api";
-
+import Pending from "../components/Pending";
 export default {
   name: "Log",
   created() {
@@ -23,6 +28,9 @@ export default {
     }
     this.id = this.$route.params.id;
     this.getTaskLogInfo();
+  },
+  components: {
+    Pending,
   },
   beforeDestroy() {
     this.closeSSEClient();
@@ -84,13 +92,13 @@ export default {
 <style scoped>
 .log_wrap {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 .logs {
   text-align: left;
-  width: 580px;
+  /*width: 580px;*/
   border: 1px solid #C260D6;
   height: calc(100vh - 181px - 24px);
   overflow-y: scroll;
@@ -104,5 +112,14 @@ export default {
 .log_type_danger {
   font-size: 14px;
   color: #F56C6C;
+}
+.left{
+  width: 280px;
+  height: 100%;
+}
+.right {
+  width: 80%;
+  height: auto;
+  margin-left: 20px;
 }
 </style>

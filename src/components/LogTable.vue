@@ -11,7 +11,7 @@
           label="ID"
       >
         <template v-slot="scope">
-          <el-link style="color: #C260D6">{{scope.row.id}}</el-link>
+          <el-link style="color: #C260D6" @click="toLog(scope.row.id)">{{scope.row.id}}</el-link>
         </template>
       </el-table-column>
       <el-table-column
@@ -108,6 +108,9 @@ export default {
       this.list = res && res.list || [];
       this.pagination.total = res && res.total || 0;
     },
+    toLog (id) {
+      this.$router.push({name:'Log',params:{id}})
+    }
   }
 }
 </script>
