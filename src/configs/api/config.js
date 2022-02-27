@@ -6,6 +6,7 @@ import Vue from 'vue'
 import {NetworkConfig} from 'resynz-vue-network-handler'
 import {EventEnums} from "../event";
 import enums from "./enums";
+import en from "element-ui/src/locale/lang/en";
 NetworkConfig.log = process.env.VUE_APP_ENV !== 'production';
 NetworkConfig.timeout = 30000;
 NetworkConfig.beforeFunc = (param,headers,loading,vue)=>{
@@ -141,6 +142,36 @@ NetworkConfig.apis = [
         name: enums.GetTaskLogList,
         url: '/log/list',
         method: 'GET'
+    },
+    {
+        name: enums.GetAdminList,
+        url: '/admin/list',
+        method: 'GET'
+    },
+    {
+        name: enums.AddAdmin,
+        url: '/admin/',
+        method: 'POST'
+    },
+    {
+        name: enums.UpdateAdmin,
+        url: '/admin/:id',
+        method: 'PUT'
+    },
+    {
+        name: enums.RemoveAdmin,
+        url: '/admin/:id',
+        method: 'DELETE'
+    },
+    {
+        name: enums.DisableAdmin,
+        url: '/admin/disable',
+        method: 'POST'
+    },
+    {
+        name: enums.EnableAdmin,
+        url: '/admin/enable',
+        method: 'POST'
     }
 ];
 

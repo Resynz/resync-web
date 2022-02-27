@@ -21,4 +21,10 @@ export default {
     GetTaskLogInfo: 'GetTaskLogInfo',
     RemoveTask: 'RemoveTask',
     GetTaskLogList: 'GetTaskLogList',
+    GetAdminList: 'GetAdminList',
+    AddAdmin: 'AddAdmin',
+    UpdateAdmin: 'UpdateAdmin',
+    RemoveAdmin: 'RemoveAdmin',
+    DisableAdmin: 'DisableAdmin',
+    EnableAdmin: 'EnableAdmin',
 }
