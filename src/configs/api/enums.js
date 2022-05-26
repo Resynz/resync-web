@@ -21,4 +21,5 @@ export default {
     GetTaskLogInfo: 'GetTaskLogInfo',
     RemoveTask: 'RemoveTask',
     GetTaskLogList: 'GetTaskLogList',
+    ModifyPassword: 'ModifyPassword'
 }

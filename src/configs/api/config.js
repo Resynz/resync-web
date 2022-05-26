@@ -141,6 +141,11 @@ NetworkConfig.apis = [
         name: enums.GetTaskLogList,
         url: '/log/list',
         method: 'GET'
+    },
+    {
+        name: enums.ModifyPassword,
+        url: '/admin/modify-passwd',
+        method: 'POST'
     }
 ];
 

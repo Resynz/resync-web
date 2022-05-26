@@ -63,7 +63,6 @@ export default {
       if (res && res.list) {
         res.list.forEach(v=>v.id = v.id.toString());
         this.groups.push(...res.list);
-        console.log('===groups',this.groups);
       }
     },
     newGroup () {
@@ -82,6 +81,9 @@ export default {
         if (res && res.result) {
           this.$message.success('操作成功');
           await this.getGroupList();
+          if (this.activeTab !== "0" && !this.groups.find(v=>v.id.toString() === this.activeTab)) {
+            this.activeTab = "0"
+          }
         }
       }).catch(e=>{})
     },

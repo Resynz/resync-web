@@ -37,6 +37,7 @@ export default {
       this.visible = true;
     },
     async save () {
+      this.data.name = this.data.name && this.data.name.trim() || ''
       if (!this.data.name) {
         return this.$message.warning('分组名称不可为空');
       }

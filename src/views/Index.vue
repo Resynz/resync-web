@@ -8,13 +8,16 @@
           </div>
           <div class="menu"></div>
           <div class="mine">
-            <el-dropdown v-if="userInfo" trigger="click">
+            <el-dropdown v-if="userInfo" @command="handleClick"  trigger="click">
                             <span class="el-dropdown-link">
                                 {{userInfo.name}} <i class="el-icon-arrow-down" />
                             </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <span @click="toLogout">安全退出</span>
+                <el-dropdown-item command="modifyPassword">
+                  <span>修改密码</span>
+                </el-dropdown-item>
+                <el-dropdown-item command="logout">
+                  <span>安全退出</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -30,23 +33,30 @@
       </el-main>
       <el-footer class="footer">Powered by Resynz.</el-footer>
     </el-container>
+
+    <!-- 修改密码 -->
+    <modify-password ref="modifyPassword" />
   </div>
 </template>
 
 <script>
 import {ApiEnums} from "../configs/api";
 import {EventEnums} from "../configs/event";
+import ModifyPassword from "../components/dialog/ModifyPassword";
 export default {
   name: "Index",
   async created() {
     if (this.$store.token) {
-      await this.getUserInfo();
+      this.$nextTick(()=>{
+        this.getUserInfo();
+      })
     }
     if (this.$route.name === 'Index') {
       return await this.$router.replace({name: 'Home'});
     }
   },
   components: {
+    ModifyPassword
   },
   data () {
     return {
@@ -78,6 +88,16 @@ export default {
         return null;
       }
       this.$router.push({name: 'Home'})
+    },
+    handleClick (val) {
+      switch (val) {
+        case "modifyPassword":
+          this.toModifyPassword();
+          break;
+        case "logout":
+          this.toLogout();
+          break;
+      }
     }
   }
 }
