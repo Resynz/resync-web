@@ -27,5 +27,6 @@ export default {
     RemoveAdmin: 'RemoveAdmin',
     DisableAdmin: 'DisableAdmin',
     EnableAdmin: 'EnableAdmin',
-    ModifyPassword: 'ModifyPassword'
+    ModifyPassword: 'ModifyPassword',
+    GetAdminLoginLog: 'GetAdminLoginLog',
 }

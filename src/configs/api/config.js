@@ -176,6 +176,11 @@ NetworkConfig.apis = [
         name: enums.ModifyPassword,
         url: '/admin/modify-passwd',
         method: 'POST'
+    },
+    {
+        name: enums.GetAdminLoginLog,
+        url: '/admin/log/login',
+        method: 'GET'
     }
 ];
 

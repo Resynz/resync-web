@@ -49,13 +49,13 @@
      <el-table-column
          align="center"
          label="操作"
-         width="240px"
      >
        <template v-slot="scope">
          <el-button v-if="scope.row.id !== 1" @click="edit(scope.row)" size="small" plain type="success">编辑</el-button>
          <el-button v-if="scope.row.status === 1" @click="disable(scope.row)" size="small" plain type="warning">禁用</el-button>
          <el-button v-if="scope.row.status === 2" @click="enable(scope.row)" size="small" plain type="primary">启用</el-button>
          <el-button v-if="scope.row.id !== 1" @click="remove(scope.row)" size="small" plain type="danger">删除</el-button>
+         <el-button @click="loginLog(scope.row)" size="small" plain type="default">登录日志</el-button>
        </template>
      </el-table-column>
 
@@ -74,19 +74,22 @@
     </el-pagination>
 
     <account-detail ref="accountD" @on-confirm="getAdminList"/>
+    <login-log-dialog ref="loginLogD" />
   </div>
 </template>
 
 <script>
 import {ApiEnums} from "../configs/api";
 import AccountDetail from "./AccountDetail";
+import LoginLogDialog from "./dialog/LoginLogDialog";
 export default {
   name: "Account",
   created() {
     this.getAdminList();
   },
   components: {
-    AccountDetail
+    AccountDetail,
+    LoginLogDialog
   },
   data () {
     return {
@@ -180,6 +183,9 @@ export default {
           await this.getAdminList();
         }
       }).catch(e=>{})
+    },
+    loginLog (row) {
+      this.$refs.loginLogD.open(row.id,row.name)
     },
   }
 }
