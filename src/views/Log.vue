@@ -1,25 +1,18 @@
 <template>
   <div class="log_wrap">
-    <div class="left">
-      <pending />
+    <div style="height: 24px;width:600px;text-align: left;">
+      <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
     </div>
-    <div class="right">
-      <div style="height: 24px;width:600px;text-align: left;">
-        <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
-      </div>
-      <div class="logs">
-        <div class="log_item" :class="`log_type_${item.type}`" v-for="(item,index) in logs" :key="index">
-          {{item.txt}}
-        </div>
+    <div class="logs">
+      <div class="log_item" :class="`log_type_${item.type}`" v-for="(item,index) in logs" :key="index">
+        {{item.txt}}
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import {ApiEnums} from "../configs/api";
-import Pending from "../components/Pending";
 export default {
   name: "Log",
   created() {
@@ -30,7 +23,6 @@ export default {
     this.getTaskLogInfo();
   },
   components: {
-    Pending,
   },
   beforeDestroy() {
     this.closeSSEClient();
@@ -91,8 +83,6 @@ export default {
 
 <style scoped>
 .log_wrap {
-  display: flex;
-  flex-direction: row;
   width: 100%;
   height: 100%;
 }
@@ -112,14 +102,5 @@ export default {
 .log_type_danger {
   font-size: 14px;
   color: #F56C6C;
-}
-.left{
-  width: 280px;
-  height: 100%;
-}
-.right {
-  width: 80%;
-  height: auto;
-  margin-left: 20px;
 }
 </style>

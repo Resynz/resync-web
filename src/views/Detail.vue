@@ -1,9 +1,5 @@
 <template>
-  <div class="wrap">
-    <div class="left">
-      <pending />
-    </div>
-    <div class="right" v-loading="loading">
+    <div class="wrap" v-loading="loading">
       <div style="height: 24px;width:600px;text-align: left;">
         <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
       </div>
@@ -22,14 +18,12 @@
         </div>
         <log-table :task-id="id" />
       </div>
+      <!-- 任务详情组建 -->
+      <task-detail ref="taskDetail" @on-save="getTaskInfo" />
     </div>
-    <!-- 任务详情组建 -->
-    <task-detail ref="taskDetail" @on-save="getTaskInfo" />
-  </div>
 </template>
 
 <script>
-import Pending from "../components/Pending";
 import TaskDetail from "../components/TaskDetail";
 import {ApiEnums} from "../configs/api";
 import LogTable from "../components/LogTable";
@@ -44,7 +38,6 @@ export default {
     this.getTaskInfo();
   },
   components: {
-    Pending,
     TaskDetail,
     LogTable
   },
@@ -90,17 +83,6 @@ export default {
 .wrap {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.left{
-  width: 280px;
-  height: 100%;
-}
-.right {
-  width: 80%;
-  height: auto;
-  margin-left: 20px;
 }
 .b_title {
   text-align: left;

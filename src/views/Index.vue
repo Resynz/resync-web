@@ -6,7 +6,10 @@
           <div class="logo">
             <h1 @click="toHome()">Resync</h1>
           </div>
-          <div class="menu"></div>
+          <div class="menu">
+            <el-link @click="toHome">首页</el-link>
+            <el-link @click="toAccountManage">账号管理</el-link>
+          </div>
           <div class="mine">
             <el-dropdown v-if="userInfo" @command="handleClick"  trigger="click">
                             <span class="el-dropdown-link">
@@ -29,7 +32,14 @@
         </div>
       </el-header>
       <el-main class="main">
-        <router-view/>
+        <div class="main-wrap">
+          <div class="left">
+            <pending />
+          </div>
+          <div class="right">
+            <router-view />
+          </div>
+        </div>
       </el-main>
       <el-footer class="footer">Powered by Resynz.</el-footer>
     </el-container>
@@ -42,6 +52,7 @@
 <script>
 import {ApiEnums} from "../configs/api";
 import {EventEnums} from "../configs/event";
+import Pending from "../components/Pending";
 import ModifyPassword from "../components/dialog/ModifyPassword";
 export default {
   name: "Index",
@@ -56,6 +67,7 @@ export default {
     }
   },
   components: {
+    Pending,
     ModifyPassword
   },
   data () {
@@ -98,6 +110,12 @@ export default {
           this.toLogout();
           break;
       }
+    },
+    toAccountManage () {
+      if (this.$route.name === 'AccountManage') {
+        return null;
+      }
+      this.$router.push({name: 'AccountManage'})
     }
   }
 }
@@ -136,6 +154,14 @@ export default {
   display: inline-block;
   cursor: pointer;
 }
+.menu {
+  width: 100%;
+  text-align: right;
+}
+.menu > a {
+  margin: 0 10px;
+  color: #C260D6;
+}
 .mine {
   width: 180px;
 }
@@ -164,5 +190,20 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.main-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.left{
+  width: 280px;
+  height: 100%;
+}
+.right {
+  width: 80%;
+  height: auto;
+  margin-left: 20px;
 }
 </style>

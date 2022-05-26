@@ -1,22 +1,15 @@
 <template>
   <div class="wrap">
-    <div class="left">
-      <pending />
-    </div>
-    <div class="right">
-      <group />
-    </div>
+    <group />
   </div>
 </template>
 
 <script>
 import Group from "../components/Group";
-import Pending from "../components/Pending";
 export default {
   name: "Home",
   components: {
     Group,
-    Pending
   },
 
 }
@@ -28,14 +21,5 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: row;
-}
-.left{
-  width: 280px;
-  height: 100%;
-}
-.right {
-  width: 80%;
-  height: auto;
-  margin-left: 20px;
 }
 </style>

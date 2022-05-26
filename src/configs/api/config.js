@@ -143,6 +143,36 @@ NetworkConfig.apis = [
         method: 'GET'
     },
     {
+        name: enums.GetAdminList,
+        url: '/admin/list',
+        method: 'GET'
+    },
+    {
+        name: enums.AddAdmin,
+        url: '/admin/',
+        method: 'POST'
+    },
+    {
+        name: enums.UpdateAdmin,
+        url: '/admin/:id',
+        method: 'PUT'
+    },
+    {
+        name: enums.RemoveAdmin,
+        url: '/admin/:id',
+        method: 'DELETE'
+    },
+    {
+        name: enums.DisableAdmin,
+        url: '/admin/disable',
+        method: 'POST'
+    },
+    {
+        name: enums.EnableAdmin,
+        url: '/admin/enable',
+        method: 'POST'
+    },
+    {
         name: enums.ModifyPassword,
         url: '/admin/modify-passwd',
         method: 'POST'
