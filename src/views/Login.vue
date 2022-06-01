@@ -12,7 +12,8 @@
             <el-form-item label="账号" prop="name">
               <el-input placeholder="请输入账号" @keyup.native="listenKeyUp" v-model="form.name" clearable/>
             </el-form-item>
-            <el-form-item label="密码" prop="password">
+            <el-form-item label="密码" prop="p
+            assword">
               <el-input placeholder="请输入密码" @keyup.native="listenKeyUp" v-model="form.password" clearable type="password" show-password/>
             </el-form-item>
           </el-form>

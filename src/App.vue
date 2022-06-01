@@ -35,15 +35,17 @@ export default {
   },
   methods: {
     setLastRoute() {
-      !this.validPath.includes(this.$route.path) && localStorage.setItem('lastRoute',JSON.stringify(Object.assign({},{name:this.$route.name,query:this.$route.query,params:this.$route.params})));
+      this.$route.name && !this.validPath.includes(this.$route.path) && localStorage.setItem('lastRoute',JSON.stringify(Object.assign({},{name:this.$route.name,query:this.$route.query,params:this.$route.params})));
     },
     checkLastRoute () {
       let lastRoute = localStorage.getItem('lastRoute');
       if (lastRoute) {
         lastRoute = JSON.parse(lastRoute);
-        this.$router.replace(lastRoute);
         localStorage.removeItem('lastRoute');
-        return null;
+        if (lastRoute.name !== 'Login') {
+          this.$router.replace(lastRoute);
+          return null;
+        }
       }
       this.$router.replace({name:'Index'})
     },
