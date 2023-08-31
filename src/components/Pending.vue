@@ -2,7 +2,7 @@
   <div class="pending_wrap">
     <div class="queue">
       <div class="title">构建队列</div>
-      <div class="content">
+      <div class="content" v-loading="loading" :element-loading-text="loadingText">
         <el-empty description="暂无信息" v-if="pendingList.length === 0" />
         <div class="task_obj" v-for="(item,index) in pendingList" :key="index">
           <div class="head">
@@ -18,7 +18,7 @@
     </div>
     <div class="status">
       <div class="title">执行状态</div>
-      <div class="content">
+      <div class="content" v-loading="loading" :element-loading-text="loadingText">
         <el-empty description="暂无信息" v-if="processList.length === 0" />
         <div class="task_obj" v-for="(item,index) in processList" :key="index">
           <div class="head">
@@ -55,6 +55,7 @@ export default {
       pendingList: [],
       sseClient: null,
       loading: false,
+      loadingText: '连接服务器中,请稍后...'
     }
   },
   methods: {
@@ -76,8 +77,7 @@ export default {
         this.loading = false;
       }
       this.sseClient.onerror = ()=>{
-        this.$message.error('连接服务器失败');
-        this.closeSSEClient();
+        this.loading = true;
       };
       this.sseClient.onmessage = d=>{
         const msg = JSON.parse(d.data);

@@ -41,7 +41,7 @@
           </div>
         </div>
       </el-main>
-      <el-footer class="footer">Powered by Resynz.</el-footer>
+      <el-footer class="footer">Powered by&nbsp;<a href="https://www.resynz.com" target="_blank">Resynz</a></el-footer>
     </el-container>
 
     <!-- 修改密码 -->

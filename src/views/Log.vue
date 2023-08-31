@@ -3,7 +3,7 @@
     <div style="height: 24px;width:600px;text-align: left;">
       <el-link style="color: #C260D6" class="el-icon-back" @click="$router.back()">返回</el-link>
     </div>
-    <div class="logs">
+    <div class="logs" ref="logs" v-on:scroll="this.onScroll">
       <div class="log_item" :class="`log_type_${item.type}`" v-for="(item,index) in logs" :key="index">
         {{item.txt}}
       </div>
@@ -32,7 +32,8 @@ export default {
       id: null,
       sseClient: null,
       loading: false,
-      logs: []
+      logs: [],
+      autoFlush: true,
     }
   },
   methods: {
@@ -60,22 +61,49 @@ export default {
       this.sseClient.onmessage = d=>{
         const msg = JSON.parse(d.data);
         if (msg.action === 'finish') {
+          if (this.autoFlush) {
+            this.$nextTick(()=>{
+              this.$refs.logs.scrollTo(0,this.$refs.logs.clientHeight);
+            })
+          }
           return this.closeSSEClient();
         }
         if (msg.action === 'process') {
-          return this.logs.push({
+          this.logs.push({
             type: 'info',
             txt:msg.txt,
           });
+          if (this.autoFlush) {
+            this.$nextTick(()=>{
+              this.$refs.logs.scrollTo(0,this.$refs.logs.clientHeight);
+            })
+          }
+          return
         }
         if (msg.action === 'error') {
           this.logs.push({
             type: 'danger',
             txt: msg.msg,
           })
+          if (this.autoFlush) {
+            this.$nextTick(()=>{
+              this.$refs.logs.scrollTo(0,this.$refs.logs.clientHeight);
+            })
+          }
           return this.closeSSEClient();
         }
       }
+    },
+    onScroll (e) {
+      let scrollTop = e.target.scrollTop;
+      let scrollHeight = e.target.scrollHeight;
+      let clientHeight = e.target.clientHeight;
+
+      // if (scrollTop + clientHeight >= scrollHeight) {
+      //   this.autoFlush = true;
+      // } else {
+      //   this.autoFlush = false;
+      // }
     }
   }
 }
